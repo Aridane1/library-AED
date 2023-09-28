@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,7 +12,7 @@ const httpOptions = {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   partners: any[] = [];
   rents: any[] = [];
   volumes: any[] = [];
