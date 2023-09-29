@@ -47,8 +47,8 @@ button[type="submit"]:hover {
 }
 
 /* Estilo para las tablas */
-.show-data-container{
-    display: flex;
+.show-data-container {
+  display: flex;
 }
 
 table {

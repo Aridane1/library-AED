@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { PartnerI } from 'src/modules/types';
 
 const httpOptions = {
@@ -15,7 +14,7 @@ const httpOptions = {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  id!: string;
+  id?: string;
   dni!: string;
   direccion!: string;
   tlf!: string;
@@ -40,16 +39,13 @@ export class AppComponent implements OnInit {
     this.getAllEditions();
   }
 
-  putPartnerInForm(
-    codigo_socio: string,
-    dni: string,
-    nombre: string,
-    apellidos: string,
-    direcion: string,
-    tlf: string
-  ) {
-    this.id = codigo_socio;
-    this.dni = dni;
+  putPartnerInForm(modifyPartner: PartnerI) {
+    this.id = modifyPartner.codigo_socio;
+    this.dni = modifyPartner.dni;
+    this.nombre = modifyPartner.nombre;
+    this.apellidos = modifyPartner.apellidos;
+    this.direccion = modifyPartner.direccion;
+    this.tlf = modifyPartner.tlf;
   }
 
   updatePartner(modifyPartner: PartnerI) {

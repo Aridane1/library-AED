@@ -70,26 +70,15 @@
       <tr *ngFor="let partner of partners">
         <td>{{ partner.codigo_socio }}</td>
         <td>{{ partner.nombre }}</td>
+        <td>{{ partner.apellidos }}</td>
+        <td>{{ partner.dni }}</td>
+        <td>{{ partner.tIf }}</td>
+
         <button (click)="deletePartner(partner.codigo_socio)">delete</button>
-        <button
-          (click)="
-            putPartnerInForm(
-              partner.codigo_socio,
-              partner.dni,
-              partner.nombre,
-              partner.apellidos,
-              partner.direcion,
-              partner.tlf
-            )
-          "
-        >
-          update
-        </button>
+        <button (click)="putPartnerInForm(partner)">update</button>
       </tr>
     </tbody>
   </table>
-</div>
-<div>
   <table>
     <thead>
       <tr>
@@ -120,8 +109,6 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div>
   <table>
     <thead>
       <tr>
@@ -136,8 +123,6 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div>
   <table>
     <thead>
       <tr>
