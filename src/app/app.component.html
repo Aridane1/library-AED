@@ -1,22 +1,37 @@
 <form>
-  <label>Id:</label>
-  <input type="text" id="id" placeholder="" #id value="{{ id.value }}" />
+  <input
+    [ngStyle]="{ display: 'none' }"
+    type="text"
+    name="id"
+    disabled
+    id="id"
+    placeholder=""
+    #id
+    value="{{ _codigo_socio }}"
+  />
   <label>DNI:</label>
   <input
     type="text"
     id="dni"
     placeholder="Introduzca el DNI"
     #dni
-    value="{{ dni.value }}"
+    value="{{ _dni }}"
   />
   <label>Nombre:</label>
-  <input type="text" id="nombre" placeholder="Introduzca el Nombre" #nombre />
+  <input
+    type="text"
+    id="nombre"
+    placeholder="Introduzca el Nombre"
+    #nombre
+    value="{{ _nombre }}"
+  />
   <label>Apellidos:</label>
   <input
     type="text"
     id="apellidos"
     placeholder="Introduzca los apellidos"
     #apellidos
+    value="{{ _apellidos }}"
   />
   <label>Direccion:</label>
   <input
@@ -24,10 +39,18 @@
     id="direcion"
     placeholder="Introduzca la direccion"
     #direccion
+    value="{{ _direccion }}"
   />
   <label>Telefono:</label>
-  <input type="text" id="tlf" placeholder="Introduzca el Telefono" #tlf />
+  <input
+    type="text"
+    id="tlf"
+    placeholder="Introduzca el Telefono"
+    #tlf
+    value="{{ _tlf }}"
+  />
   <button
+    *ngIf="!buttonSelect"
     type="submit"
     (click)="
       addPartner({
@@ -42,6 +65,7 @@
     Añadir Socio
   </button>
   <button
+    *ngIf="buttonSelect"
     type="submit"
     (click)="
       updatePartner({
@@ -64,6 +88,10 @@
       <tr>
         <th>ID</th>
         <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Dni</th>
+        <th>tlf</th>
+        <th>Direccion</th>
       </tr>
     </thead>
     <tbody>
@@ -72,9 +100,9 @@
         <td>{{ partner.nombre }}</td>
         <td>{{ partner.apellidos }}</td>
         <td>{{ partner.dni }}</td>
-        <td>{{ partner.tIf }}</td>
-
-        <button (click)="deletePartner(partner.codigo_socio)">delete</button>
+        <td>{{ partner.tlf }}</td>
+        <td>{{ partner.direccion }}</td>
+        <button (click)="deletePartner(partner)">delete</button>
         <button (click)="putPartnerInForm(partner)">update</button>
       </tr>
     </tbody>

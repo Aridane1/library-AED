@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PartnerI } from 'src/modules/types';
 
 const httpOptions = {
@@ -14,14 +14,15 @@ const httpOptions = {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  id?: string;
-  dni!: string;
-  direccion!: string;
-  tlf!: string;
-  nombre!: string;
-  apellidos!: string;
+  buttonSelect: boolean = false;
+  _codigo_socio?: string;
+  _dni!: string;
+  _direccion!: string;
+  _tlf!: string;
+  _nombre!: string;
+  _apellidos!: string;
 
-  partners: any[] = [];
+  partners!: PartnerI[];
   rents: any[] = [];
   volumes: any[] = [];
   books: any[] = [];
@@ -40,15 +41,17 @@ export class AppComponent implements OnInit {
   }
 
   putPartnerInForm(modifyPartner: PartnerI) {
-    this.id = modifyPartner.codigo_socio;
-    this.dni = modifyPartner.dni;
-    this.nombre = modifyPartner.nombre;
-    this.apellidos = modifyPartner.apellidos;
-    this.direccion = modifyPartner.direccion;
-    this.tlf = modifyPartner.tlf;
+    this._codigo_socio = modifyPartner.codigo_socio;
+    this._nombre = modifyPartner.nombre;
+    this._apellidos = modifyPartner.apellidos;
+    this._direccion = modifyPartner.direccion;
+    this._tlf = modifyPartner.tlf;
+    this._dni = modifyPartner.dni;
+    this.buttonSelect = true;
   }
 
   updatePartner(modifyPartner: PartnerI) {
+    this.buttonSelect = false;
     this.http
       .put<any[]>(
         `http://localhost:3000/socios/${modifyPartner.codigo_socio}`,
@@ -58,11 +61,13 @@ export class AppComponent implements OnInit {
       .subscribe((data) => (this.partners = data));
   }
 
-  deletePartner(id: string) {
+  deletePartner(idPartner: PartnerI) {
     this.http
-      .delete<any[]>(`http://localhost:3000/socios/${id}`)
-      .subscribe((data) => (this.partners = data));
-    location.reload();
+      .delete<any[]>(`http://localhost:3000/socios/${idPartner.codigo_socio}`)
+      .subscribe((response) => {
+        this.partners = response;
+        this.getAllPartners();
+      });
   }
 
   addPartner(newPartner: PartnerI) {

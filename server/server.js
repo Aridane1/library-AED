@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "Aridanejdr090503",
   database: "db_library",
 });
 
@@ -38,7 +38,7 @@ app.put("/socios/:id", (req, res) => {
   connection.query(
     `UPDATE SOCIOS SET DNI='${req.body.dni}',
     direccion='${req.body.direccion}',
-    tIf='${req.body.tIf}',
+    tlf='${req.body.tlf}',
     nombre='${req.body.nombre}',
     apellidos='${req.body.apellidos}' 
     where codigo_socio = '${id}'`,
@@ -51,10 +51,10 @@ app.put("/socios/:id", (req, res) => {
 
 app.post("/socios", (req, res) => {
   connection.query(
-    `INSERT INTO socios(dni,direccion,tIf,nombre,apellidos) 
+    `INSERT INTO socios(dni,direccion,tlf,nombre,apellidos) 
     VALUES('${req.body.dni}',
     '${req.body.direccion}',
-    '${req.body.tIf}',
+    '${req.body.tlf}',
     '${req.body.nombre}',
     '${req.body.apellidos}')`,
     (err, results) => {
