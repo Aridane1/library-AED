@@ -1,6 +1,14 @@
 <form>
+  <label>Id:</label>
+  <input type="text" id="id" placeholder="" #id value="{{ id.value }}" />
   <label>DNI:</label>
-  <input type="text" id="dni" placeholder="Introduzca el DNI" #dni />
+  <input
+    type="text"
+    id="dni"
+    placeholder="Introduzca el DNI"
+    #dni
+    value="{{ dni.value }}"
+  />
   <label>Nombre:</label>
   <input type="text" id="nombre" placeholder="Introduzca el Nombre" #nombre />
   <label>Apellidos:</label>
@@ -19,20 +27,34 @@
   />
   <label>Telefono:</label>
   <input type="text" id="tlf" placeholder="Introduzca el Telefono" #tlf />
-
   <button
     type="submit"
     (click)="
-      addPartner(
-        dni.value,
-        direccion.value,
-        tlf.value,
-        nombre.value,
-        apellidos.value
-      )
+      addPartner({
+        dni: dni.value,
+        direccion: direccion.value,
+        tlf: tlf.value,
+        nombre: nombre.value,
+        apellidos: apellidos.value
+      })
     "
   >
     Añadir Socio
+  </button>
+  <button
+    type="submit"
+    (click)="
+      updatePartner({
+        codigo_socio: id.value,
+        dni: dni.value,
+        direccion: direccion.value,
+        tlf: tlf.value,
+        nombre: nombre.value,
+        apellidos: apellidos.value
+      })
+    "
+  >
+    Actualizar Socio
   </button>
 </form>
 
@@ -48,9 +70,26 @@
       <tr *ngFor="let partner of partners">
         <td>{{ partner.codigo_socio }}</td>
         <td>{{ partner.nombre }}</td>
+        <button (click)="deletePartner(partner.codigo_socio)">delete</button>
+        <button
+          (click)="
+            putPartnerInForm(
+              partner.codigo_socio,
+              partner.dni,
+              partner.nombre,
+              partner.apellidos,
+              partner.direcion,
+              partner.tlf
+            )
+          "
+        >
+          update
+        </button>
       </tr>
     </tbody>
   </table>
+</div>
+<div>
   <table>
     <thead>
       <tr>
@@ -65,6 +104,8 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div>
   <table>
     <thead>
       <tr>
@@ -79,6 +120,8 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div>
   <table>
     <thead>
       <tr>
@@ -93,6 +136,8 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div>
   <table>
     <thead>
       <tr>

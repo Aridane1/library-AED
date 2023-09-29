@@ -15,15 +15,41 @@ app.use(express.urlencoded({ extended: true }));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "test1234",
   database: "db_library",
 });
 
 connection.connect();
 
-app.post("/socios", function (req, res) {
-  //const [dni, direccion, tIf, nombre, apellidos] = req.body;
-  console.log(req.body.dni);
+app.delete("/socios/:id", (req, res) => {
+  let id = req.params.id;
+  connection.query(
+    `DELETE FROM socios where codigo_socio='${id}'`,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
+app.put("/socios/:id", (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  connection.query(
+    `UPDATE SOCIOS SET DNI='${req.body.dni}',
+    direccion='${req.body.direccion}',
+    tIf='${req.body.tIf}',
+    nombre='${req.body.nombre}',
+    apellidos='${req.body.apellidos}' 
+    where codigo_socio = '${id}'`,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
+app.post("/socios", (req, res) => {
   connection.query(
     `INSERT INTO socios(dni,direccion,tIf,nombre,apellidos) 
     VALUES('${req.body.dni}',

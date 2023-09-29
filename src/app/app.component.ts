@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { PartnerI } from 'src/modules/types';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,6 +15,13 @@ const httpOptions = {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  id!: string;
+  dni!: string;
+  direccion!: string;
+  tlf!: string;
+  nombre!: string;
+  apellidos!: string;
+
   partners: any[] = [];
   rents: any[] = [];
   volumes: any[] = [];
@@ -31,25 +40,38 @@ export class AppComponent implements OnInit {
     this.getAllEditions();
   }
 
-  addPartner(
+  putPartnerInForm(
+    codigo_socio: string,
     dni: string,
-    direccion: string,
-    tlf: string,
     nombre: string,
-    apellidos: string
+    apellidos: string,
+    direcion: string,
+    tlf: string
   ) {
+    this.id = codigo_socio;
+    this.dni = dni;
+  }
+
+  updatePartner(modifyPartner: PartnerI) {
     this.http
-      .post<any[]>(
-        'http://localhost:3000/socios',
-        {
-          dni,
-          direccion,
-          tlf,
-          nombre,
-          apellidos,
-        },
+      .put<any[]>(
+        `http://localhost:3000/socios/${modifyPartner.codigo_socio}`,
+        modifyPartner,
         httpOptions
       )
+      .subscribe((data) => (this.partners = data));
+  }
+
+  deletePartner(id: string) {
+    this.http
+      .delete<any[]>(`http://localhost:3000/socios/${id}`)
+      .subscribe((data) => (this.partners = data));
+    location.reload();
+  }
+
+  addPartner(newPartner: PartnerI) {
+    this.http
+      .post<PartnerI[]>('http://localhost:3000/socios', newPartner, httpOptions)
       .subscribe((data) => (this.partners = data));
   }
 
