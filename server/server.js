@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Aridanejdr090503",
+  password: "",
   database: "db_library",
 });
 
@@ -40,7 +40,7 @@ app.put("/socios/:id", (req, res) => {
     direccion='${req.body.direccion}',
     tlf='${req.body.tlf}',
     nombre='${req.body.nombre}',
-    apellidos='${req.body.apellidos}' 
+    apellidos='${req.body.apellidos}'
     where codigo_socio = '${id}'`,
     (err, results) => {
       if (err) throw err;
