@@ -1,6 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { PartnerI } from 'src/modules/types';
+import {
+  BookI,
+  EditI,
+  EditionI,
+  PartnerI,
+  RentI,
+  VolumeI,
+} from 'src/modules/types';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,11 +30,11 @@ export class AppComponent implements OnInit {
   _apellidos!: string;
 
   partners!: PartnerI[];
-  rents: any[] = [];
-  volumes: any[] = [];
-  books: any[] = [];
-  edits: any[] = [];
-  editions: any[] = [];
+  rents: RentI[] = [];
+  volumes: VolumeI[] = [];
+  books: BookI[] = [];
+  edits: EditI[] = [];
+  editions: EditionI[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -53,17 +60,22 @@ export class AppComponent implements OnInit {
   updatePartner(modifyPartner: PartnerI) {
     this.buttonSelect = false;
     this.http
-      .put<any[]>(
+      .put<PartnerI[]>(
         `http://localhost:3000/socios/${modifyPartner.codigo_socio}`,
         modifyPartner,
         httpOptions
       )
-      .subscribe((data) => (this.partners = data));
+      .subscribe((response) => {
+        this.partners = response;
+        this.getAllPartners();
+      });
   }
 
   deletePartner(idPartner: PartnerI) {
     this.http
-      .delete<any[]>(`http://localhost:3000/socios/${idPartner.codigo_socio}`)
+      .delete<PartnerI[]>(
+        `http://localhost:3000/socios/${idPartner.codigo_socio}`
+      )
       .subscribe((response) => {
         this.partners = response;
         this.getAllPartners();
@@ -77,37 +89,42 @@ export class AppComponent implements OnInit {
   }
 
   getAllPartners() {
-    this.http.get<any[]>('http://localhost:3000/socios').subscribe(
+    this.http.get<PartnerI[]>('http://localhost:3000/socios').subscribe(
       (data) => (this.partners = data),
       (error) => console.error(error)
     );
   }
+
   getAllRent() {
-    this.http.get<any[]>('http://localhost:3000/alquilan').subscribe(
+    this.http.get<RentI[]>('http://localhost:3000/alquilan').subscribe(
       (data) => (this.rents = data),
       (error) => console.error(error)
     );
   }
+
   getAllVolumes() {
-    this.http.get<any[]>('http://localhost:3000/volumenes').subscribe(
+    this.http.get<VolumeI[]>('http://localhost:3000/volumenes').subscribe(
       (data) => (this.volumes = data),
       (error) => console.error(error)
     );
   }
+
   getAllBooks() {
-    this.http.get<any[]>('http://localhost:3000/libros').subscribe(
+    this.http.get<BookI[]>('http://localhost:3000/libros').subscribe(
       (data) => (this.books = data),
       (error) => console.error(error)
     );
   }
+
   getAllEdits() {
-    this.http.get<any[]>('http://localhost:3000/editados').subscribe(
+    this.http.get<EditI[]>('http://localhost:3000/editados').subscribe(
       (data) => (this.edits = data),
       (error) => console.error(error)
     );
   }
+
   getAllEditions() {
-    this.http.get<any[]>('http://localhost:3000/ediciones').subscribe(
+    this.http.get<EditionI[]>('http://localhost:3000/ediciones').subscribe(
       (data) => (this.editions = data),
       (error) => console.error(error)
     );
