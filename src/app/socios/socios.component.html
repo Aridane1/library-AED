@@ -1,1 +1,110 @@
-<p>socios works!</p>
+ <form>
+    <input
+      [ngStyle]="{ display: 'none' }"
+      type="text"
+      name="id"
+      disabled
+      id="id"
+      placeholder=""
+      #id
+      value="{{ _codigo_socio }}"
+    />
+    <label>DNI:</label>
+    <input
+      type="text"
+      id="dni"
+      placeholder="Introduzca el DNI"
+      #dni
+      value="{{ _dni }}"
+    />
+    <label>Nombre:</label>
+    <input
+      type="text"
+      id="nombre"
+      placeholder="Introduzca el Nombre"
+      #nombre
+      value="{{ _nombre }}"
+    />
+    <label>Apellidos:</label>
+    <input
+      type="text"
+      id="apellidos"
+      placeholder="Introduzca los apellidos"
+      #apellidos
+      value="{{ _apellidos }}"
+    />
+    <label>Direccion:</label>
+    <input
+      type="text"
+      id="direcion"
+      placeholder="Introduzca la direccion"
+      #direccion
+      value="{{ _direccion }}"
+    />
+    <label>Telefono:</label>
+    <input
+      type="text"
+      id="tlf"
+      placeholder="Introduzca el Telefono"
+      #tlf
+      value="{{ _tlf }}"
+    />
+    <button
+      *ngIf="!buttonSelect"
+      type="submit"
+      (click)="
+        addPartner({
+          dni: dni.value,
+          direccion: direccion.value,
+          tlf: tlf.value,
+          nombre: nombre.value,
+          apellidos: apellidos.value
+        })
+      "
+    >
+      Añadir Socio
+    </button>
+    <button
+      *ngIf="buttonSelect"
+      type="submit"
+      (click)="
+        updatePartner({
+          codigo_socio: id.value,
+          dni: dni.value,
+          direccion: direccion.value,
+          tlf: tlf.value,
+          nombre: nombre.value,
+          apellidos: apellidos.value
+        })
+      "
+    >
+      Actualizar Socio
+    </button>
+  </form>
+  
+  <div class="show-data-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Dni</th>
+          <th>tlf</th>
+          <th>Direccion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let partner of partners">
+          <td>{{ partner.codigo_socio }}</td>
+          <td>{{ partner.nombre }}</td>
+          <td>{{ partner.apellidos }}</td>
+          <td>{{ partner.dni }}</td>
+          <td>{{ partner.tlf }}</td>
+          <td>{{ partner.direccion }}</td>
+          <button (click)="deletePartner(partner)">delete</button>
+          <button (click)="putPartnerInForm(partner)">update</button>
+        </tr>
+      </tbody>
+    </table>
+  

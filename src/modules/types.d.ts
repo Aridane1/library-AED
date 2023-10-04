@@ -18,6 +18,7 @@ export interface RentI {
 export interface VolumeI {
   id?: string;
   estado: string;
+  id_libro:string;
 }
 
 export interface BookI {
@@ -35,6 +36,7 @@ export interface EditI {
 }
 
 export interface EditionI {
+  id?: string;
   ISBN?: string;
   editorial: string;
 }

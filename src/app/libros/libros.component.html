@@ -1,1 +1,97 @@
-<p>libros works!</p>
+<form>
+    <input
+      [ngStyle]="{ display: 'none' }"
+      type="text"
+      name="id"
+      disabled
+      id="id"
+      placeholder=""
+      #idInput
+      value="{{ _id }}"
+    />
+    <label>Título:</label>
+    <input
+      type="text"
+      id="titulo"
+      placeholder="Introduzca el título"
+      #titulo
+      value="{{ _titulo }}"
+    />
+    <label>Editorial:</label>
+    <input
+      type="text"
+      id="editorial"
+      placeholder="Introduzca la editorial"
+      #editorial
+      value="{{ _editorial }}"
+    />
+    <label>Autor:</label>
+    <input
+      type="text"
+      id="autor"
+      placeholder="Introduzca el autor"
+      #autor
+      value="{{ _autor }}"
+    />
+    <label>Año Escrito:</label>
+    <input
+      type="text"
+      id="ano_escrito"
+      placeholder="Introduzca el año en que fue escrito"
+      #anoEscrito
+      value="{{ _ano_escrito }}"
+    />
+
+    <button
+      type="submit"
+      (click)="
+        addBook({
+          titulo: titulo.value,
+          editorial: editorial.value,
+          autor: autor.value,
+          ano_escrito: anoEscrito.value
+        })
+      "
+    >
+      Añadir Libro
+    </button>
+    <button
+      type="submit"
+      (click)="
+        updateBook({
+          id: idInput.value,
+          titulo: titulo.value,
+          editorial: editorial.value,
+          autor: autor.value,
+          ano_escrito: anoEscrito.value
+        })
+      "
+    >
+      Actualizar Libro
+    </button>
+</form>
+
+<div class="show-data-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Editorial</th>
+          <th>Autor</th>
+          <th>Año Escrito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.id }}</td>
+          <td>{{ book.titulo }}</td>
+          <td>{{ book.editorial }}</td>
+          <td>{{ book.autor }}</td>
+          <td>{{ book.ano_escrito }}</td>
+          <button (click)="deleteBook(book)">Eliminar</button>
+          <button (click)="putBookInForm(book)">Actualizar</button>
+        </tr>
+      </tbody>
+    </table>
+</div>

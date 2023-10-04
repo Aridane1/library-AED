@@ -1,1 +1,94 @@
 <p>alquilan works!</p>
+<form>
+    <label>Código Socio:</label>
+    <input
+      type="text"
+      id="codigo_socio"
+      placeholder="Introduzca el código del socio"
+      #codigoSocio
+      value="{{ _codigo_socio }}"
+    />
+    <label>ID Volumen:</label>
+    <input
+      type="text"
+      id="id_volumen"
+      placeholder="Introduzca el ID del volumen"
+      #idVolumen
+      value="{{ _id_volumen }}"
+    />
+    <label>Fecha de Préstamo:</label>
+    <input
+      type="date"
+      id="f_prestamo"
+      #fPrestamo
+      value="{{ _f_prestamo }}"
+    />
+    <label>Fecha de Devolución:</label>
+    <input
+      type="date"
+      id="f_devolucion"
+      #fDevolucion
+      value="{{ _f_devolucion }}"
+    />
+    <label>Fecha Límite:</label>
+    <input
+      type="date"
+      id="f_limite"
+      #fLimite
+      value="{{ _f_limite }}"
+    />
+
+    <button
+      type="submit"
+      (click)="
+        addRent({
+          codigo_socio: codigoSocio.value,
+          id_volumen: idVolumen.value,
+          f_prestamo: fPrestamo.value,
+          f_devolucion: fDevolucion.value,
+          f_limite: fLimite.value
+        })
+      "
+    >
+      Registrar Alquiler
+    </button>
+    <button
+      type="submit"
+      (click)="
+        updateRent({
+          codigo_socio: codigoSocio.value,
+          id_volumen: idVolumen.value,
+          f_prestamo: fPrestamo.value,
+          f_devolucion: fDevolucion.value,
+          f_limite: fLimite.value
+        })
+      "
+    >
+      Actualizar Alquiler
+    </button>
+</form>
+
+<div class="show-data-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Código Socio</th>
+          <th>ID Volumen</th>
+          <th>Fecha Préstamo</th>
+          <th>Fecha Devolución</th>
+          <th>Fecha Límite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rent of rents">
+          <td>{{ rent.codigo_socio }}</td>
+          <td>{{ rent.id_volumen }}</td>
+          <td>{{ rent.f_prestamo }}</td>
+          <td>{{ rent.f_devolucion }}</td>
+          <td>{{ rent.f_limite }}</td>
+          <button (click)="deleteRent(rent)">Eliminar</button>
+          <button (click)="putRentInForm(rent)">Actualizar</button>
+        </tr>
+      </tbody>
+    </table>
+</div>
