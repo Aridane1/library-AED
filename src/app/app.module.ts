@@ -12,9 +12,16 @@ import { EditadosComponent } from './editados/editados.component';
 import { VolumenesComponent } from './volumenes/volumenes.component';
 import { AlquilanComponent } from './alquilan/alquilan.component';
 
-
 @NgModule({
-  declarations: [AppComponent, SociosComponent, LibrosComponent, EdicionesComponent, EditadosComponent, VolumenesComponent, AlquilanComponent],
+  declarations: [
+    AppComponent,
+    SociosComponent,
+    LibrosComponent,
+    EdicionesComponent,
+    EditadosComponent,
+    VolumenesComponent,
+    AlquilanComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

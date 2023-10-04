@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EditionI } from 'src/modules/types';  
+import { EditI, EditionI } from 'src/modules/types';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,13 +11,13 @@ const httpOptions = {
 @Component({
   selector: 'app-editados',
   templateUrl: './editados.component.html',
-  styleUrls: ['./editados.component.css']
+  styleUrls: ['./editados.component.css'],
 })
 export class EditadosComponent implements OnInit {
-  _id?: string;
+  _id_libro?: string;
   _ISBN?: string;
-  _editorial!: string;
-  editions!: EditionI[];
+  _ano_editado!: string;
+  editions!: EditI[];
 
   constructor(private http: HttpClient) {}
 
@@ -26,22 +26,23 @@ export class EditadosComponent implements OnInit {
   }
 
   getAllEditions() {
-    this.http.get<EditionI[]>('http://localhost:3000/editados').subscribe(
+    this.http.get<EditI[]>('http://localhost:3000/editados').subscribe(
       (data) => (this.editions = data),
       (error) => console.error(error)
     );
   }
 
-  putEditionInForm(modifyEdition: EditionI) {
-    this._id = modifyEdition.id;
+  putEditionInForm(modifyEdition: EditI) {
     this._ISBN = modifyEdition.ISBN;
-    this._editorial = modifyEdition.editorial;
+    this._id_libro = modifyEdition.id_libro;
+    this._ano_editado = modifyEdition.ano_editado;
   }
 
-  updateEdition(modifyEdition: EditionI) {
+  updateEdition(modifyEdition: EditI) {
+    console.log(modifyEdition);
     this.http
-      .put<EditionI[]>(
-        `http://localhost:3000/editados/${modifyEdition.id}`,
+      .put<EditI[]>(
+        `http://localhost:3000/editados/${modifyEdition.ISBN}/${modifyEdition.id_libro}`,
         modifyEdition,
         httpOptions
       )
@@ -51,10 +52,10 @@ export class EditadosComponent implements OnInit {
       });
   }
 
-  deleteEdition(idEdition: EditionI) {
+  deleteEdition(idEdition: EditI) {
     this.http
-      .delete<EditionI[]>(
-        `http://localhost:3000/editados/${idEdition.id}`
+      .delete<EditI[]>(
+        `http://localhost:3000/editados/${idEdition.ISBN}/${idEdition.id_libro}`
       )
       .subscribe((response) => {
         this.editions = response;
@@ -62,9 +63,9 @@ export class EditadosComponent implements OnInit {
       });
   }
 
-  addEdition(newEdition: EditionI) {
+  addEdition(newEdition: EditI) {
     this.http
-      .post<EditionI[]>('http://localhost:3000/editados', newEdition, httpOptions)
+      .post<EditI[]>('http://localhost:3000/editados', newEdition, httpOptions)
       .subscribe((data) => (this.editions = data));
   }
 }
