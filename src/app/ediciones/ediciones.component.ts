@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EditionI } from 'src/modules/types';  
+import { EditionI } from 'src/modules/types';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ const httpOptions = {
 @Component({
   selector: 'app-ediciones',
   templateUrl: './ediciones.component.html',
-  styleUrls: ['./ediciones.component.css']
+  styleUrls: ['./ediciones.component.css'],
 })
 export class EdicionesComponent implements OnInit {
   _id?: string;
@@ -32,7 +32,6 @@ export class EdicionesComponent implements OnInit {
   }
 
   putEditionInForm(modifyEdition: EditionI) {
-    this._id = modifyEdition.id;
     this._ISBN = modifyEdition.ISBN;
     this._editorial = modifyEdition.editorial;
   }
@@ -40,7 +39,7 @@ export class EdicionesComponent implements OnInit {
   updateEdition(modifyEdition: EditionI) {
     this.http
       .put<EditionI[]>(
-        `http://localhost:3000/ediciones/${modifyEdition.id}`,
+        `http://localhost:3000/ediciones/${modifyEdition.ISBN}`,
         modifyEdition,
         httpOptions
       )
@@ -52,9 +51,7 @@ export class EdicionesComponent implements OnInit {
 
   deleteEdition(idEdition: EditionI) {
     this.http
-      .delete<EditionI[]>(
-        `http://localhost:3000/ediciones/${idEdition.id}`
-      )
+      .delete<EditionI[]>(`http://localhost:3000/ediciones/${idEdition.ISBN}`)
       .subscribe((response) => {
         this.editions = response;
         this.getAllEditions();
@@ -63,7 +60,11 @@ export class EdicionesComponent implements OnInit {
 
   addEdition(newEdition: EditionI) {
     this.http
-      .post<EditionI[]>('http://localhost:3000/ediciones', newEdition, httpOptions)
+      .post<EditionI[]>(
+        'http://localhost:3000/ediciones',
+        newEdition,
+        httpOptions
+      )
       .subscribe((data) => (this.editions = data));
   }
 }

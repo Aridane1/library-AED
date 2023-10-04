@@ -56,9 +56,7 @@ export class VolumenesComponent implements OnInit {
 
   deleteVolume(idVolume: VolumeI) {
     this.http
-      .delete<VolumeI[]>(
-        `http://localhost:3000/volumenes/${idVolume.id}`
-      )
+      .delete<VolumeI[]>(`http://localhost:3000/volumenes/${idVolume.id}`)
       .subscribe((response) => {
         this.volumes = response;
         this.getAllVolumes();
@@ -67,7 +65,11 @@ export class VolumenesComponent implements OnInit {
 
   addVolume(newVolume: VolumeI) {
     this.http
-      .post<VolumeI[]>('http://localhost:3000/volumenes', newVolume, httpOptions)
+      .post<VolumeI[]>(
+        'http://localhost:3000/volumenes',
+        newVolume,
+        httpOptions
+      )
       .subscribe((data) => (this.volumes = data));
   }
 }
