@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "test1234",
+  password: "Aridanejdr090503",
   database: "db_library",
 });
 
@@ -85,6 +85,21 @@ app.put("/alquilan/:id_socio/:id_volumen", (req, res) => {
     f_devolucion='${req.body.f_devolucion}',
     f_limite='${req.body.f_limite}'
     where codigo_socio = '${id_socio}' AND id_volumen='${id_volumen}' `,
+    (err, results) => {
+      if (err) throw err;
+      res.send(results);
+    }
+  );
+});
+
+app.post("/alquilan", (req, res) => {
+  connection.query(
+    `INSERT INTO alquilan(codigo_socio, id_volumen, f_prestamo, f_devolucion, f_limite)
+       VALUES('${req.body.codigo_socio}',
+              '${req.body.id_volumen}',
+              '${req.body.f_prestamo}',
+              '${req.body.f_devolucion}',
+              '${req.body.f_limite}')`,
     (err, results) => {
       if (err) throw err;
       res.send(results);

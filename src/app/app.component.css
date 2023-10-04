@@ -7,6 +7,25 @@
   background-color: #f0f0f0;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.nav a {
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 10px;
+
+}
+
+.nav a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
 /* Estilo para el formulario */
 form {
   max-width: 400px;
