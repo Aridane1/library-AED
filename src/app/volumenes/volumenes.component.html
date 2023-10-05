@@ -1,76 +1,79 @@
-<form>
-  <input
-    [ngStyle]="{ display: 'none' }"
-    type="text"
-    name="id"
-    disabled
-    id="id"
-    placeholder=""
-    #idInput
-    value="{{ _id }}"
-  />
-  <label>Estado:</label>
-  <input
-    type="text"
-    id="estado"
-    placeholder="Introduzca el estado"
-    #estado
-    value="{{ _estado }}"
-  />
-  <label>ID Libro:</label>
-  <input
-    type="text"
-    id="id_libro"
-    placeholder="Introduzca el ID del libro"
-    #idLibro
-    value="{{ _id_libro }}"
-  />
+<div class="main-container">
+  <div class="form-main-container">
+    <form>
+      <input
+        [ngStyle]="{ display: 'none' }"
+        type="text"
+        name="id"
+        disabled
+        id="id"
+        placeholder=""
+        #idInput
+        value="{{ _id }}"
+      />
+      <label>Estado:</label>
+      <input
+        type="text"
+        id="estado"
+        placeholder="Introduzca el estado"
+        #estado
+        value="{{ _estado }}"
+      />
+      <label>ID Libro:</label>
+      <input
+        type="text"
+        id="id_libro"
+        placeholder="Introduzca el ID del libro"
+        #idLibro
+        value="{{ _id_libro }}"
+      />
 
-  <button
-    *ngIf="!buttonSelect"
-    type="submit"
-    (click)="
-      addVolume({
-        id: idInput.value,
-        estado: estado.value,
-        id_libro: idLibro.value
-      })
-    "
-  >
-    Añadir Volumen
-  </button>
-  <button
-    *ngIf="buttonSelect"
-    type="submit"
-    (click)="
-      updateVolume({
-        id: idInput.value,
-        estado: estado.value,
-        id_libro: idLibro.value
-      })
-    "
-  >
-    Actualizar Volumen
-  </button>
-</form>
-
-<div class="show-data-container">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Estado</th>
-        <th>ID Libro</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let volume of volumes">
-        <td>{{ volume.id }}</td>
-        <td>{{ volume.estado }}</td>
-        <td>{{ volume.id_libro }}</td>
-        <button (click)="deleteVolume(volume)">delete</button>
-        <button (click)="putVolumeInForm(volume)">update</button>
-      </tr>
-    </tbody>
-  </table>
+      <button
+        *ngIf="!buttonSelect"
+        type="submit"
+        (click)="
+          addVolume({
+            id: idInput.value,
+            estado: estado.value,
+            id_libro: idLibro.value
+          })
+        "
+      >
+        Añadir Volumen
+      </button>
+      <button
+        *ngIf="buttonSelect"
+        type="submit"
+        (click)="
+          updateVolume({
+            id: idInput.value,
+            estado: estado.value,
+            id_libro: idLibro.value
+          })
+        "
+      >
+        Actualizar Volumen
+      </button>
+    </form>
+  </div>
+  <div class="show-data-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Estado</th>
+          <th>ID Libro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let volume of volumes">
+          <td>{{ volume.id }}</td>
+          <td>{{ volume.estado }}</td>
+          <td>{{ volume.id_libro }}</td>
+          <button (click)="deleteVolume(volume)">delete</button>
+          <button (click)="putVolumeInForm(volume)">update</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

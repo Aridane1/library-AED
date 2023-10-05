@@ -1,73 +1,76 @@
-<form>
-  <label>ID:</label>
-  <input
-    type="text"
-    name="id"
-    id="id"
-    placeholder="Introduzca la Id del libro"
-    #idInput
-    value="{{ _id_libro }}"
-  />
-  <label>ISBN:</label>
-  <input
-    type="text"
-    id="ISBN"
-    placeholder="Introduzca el ISBN"
-    #isbn
-    value="{{ _ISBN }}"
-  />
-  <label>Año Editado:</label>
-  <input
-    type="text"
-    id="editorial"
-    placeholder="Introduzca la editorial"
-    #anoEditado
-    value="{{ _ano_editado }}"
-  />
+<div class="main-container">
+  <div class="form-main-container">
+    <form>
+      <label>ID:</label>
+      <input
+        type="text"
+        name="id"
+        id="id"
+        placeholder="Introduzca la Id del libro"
+        #idInput
+        value="{{ _id_libro }}"
+      />
+      <label>ISBN:</label>
+      <input
+        type="text"
+        id="ISBN"
+        placeholder="Introduzca el ISBN"
+        #isbn
+        value="{{ _ISBN }}"
+      />
+      <label>Año Editado:</label>
+      <input
+        type="text"
+        id="editorial"
+        placeholder="Introduzca la editorial"
+        #anoEditado
+        value="{{ _ano_editado }}"
+      />
 
-  <button
-    type="submit"
-    (click)="
-      addEdition({
-        ISBN: isbn.value,
-        id_libro: idInput.value,
-        ano_editado: anoEditado.value
-      })
-    "
-  >
-    Añadir Edición
-  </button>
-  <button
-    type="submit"
-    (click)="
-      updateEdition({
-        ISBN: isbn.value,
-        id_libro: idInput.value,
-        ano_editado: anoEditado.value
-      })
-    "
-  >
-    Actualizar Edición
-  </button>
-</form>
-
-<div class="show-data-container">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>ISBN</th>
-        <th>Año Editado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let edition of editions">
-        <td>{{ edition.id_libro }}</td>
-        <td>{{ edition.ISBN }}</td>
-        <td>{{ edition.ano_editado }}</td>
-        <button (click)="deleteEdition(edition)">Eliminar</button>
-        <button (click)="putEditionInForm(edition)">Actualizar</button>
-      </tr>
-    </tbody>
-  </table>
+      <button
+        type="submit"
+        (click)="
+          addEdition({
+            ISBN: isbn.value,
+            id_libro: idInput.value,
+            ano_editado: anoEditado.value
+          })
+        "
+      >
+        Añadir Edición
+      </button>
+      <button
+        type="submit"
+        (click)="
+          updateEdition({
+            ISBN: isbn.value,
+            id_libro: idInput.value,
+            ano_editado: anoEditado.value
+          })
+        "
+      >
+        Actualizar Edición
+      </button>
+    </form>
+  </div>
+  <div class="show-data-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ISBN</th>
+          <th>Año Editado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let edition of editions">
+          <td>{{ edition.id_libro }}</td>
+          <td>{{ edition.ISBN }}</td>
+          <td>{{ edition.ano_editado }}</td>
+          <button (click)="deleteEdition(edition)">Eliminar</button>
+          <button (click)="putEditionInForm(edition)">Actualizar</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
