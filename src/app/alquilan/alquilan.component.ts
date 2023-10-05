@@ -14,6 +14,7 @@ const httpOptions = {
   styleUrls: ['./alquilan.component.css'],
 })
 export class AlquilanComponent implements OnInit {
+  buttonSelect: boolean = false;
   _codigo_socio!: string;
   _id_volumen!: string;
   _f_prestamo!: string;
@@ -40,6 +41,7 @@ export class AlquilanComponent implements OnInit {
     this._f_prestamo = modifyRent.f_prestamo;
     this._f_devolucion = modifyRent.f_devolucion;
     this._f_limite = modifyRent.f_limite;
+    this.buttonSelect = true;
   }
 
   updateRent(modifyRent: RentI) {
@@ -50,6 +52,7 @@ export class AlquilanComponent implements OnInit {
         this.rents = response;
         this.getAllRents();
       });
+    this.buttonSelect = false;
   }
 
   deleteRent(rent: RentI) {

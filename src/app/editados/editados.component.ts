@@ -18,6 +18,7 @@ export class EditadosComponent implements OnInit {
   _ISBN?: string;
   _ano_editado!: string;
   editions!: EditI[];
+  buttonSelect: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +37,7 @@ export class EditadosComponent implements OnInit {
     this._ISBN = modifyEdition.ISBN;
     this._id_libro = modifyEdition.id_libro;
     this._ano_editado = modifyEdition.ano_editado;
+    this.buttonSelect = true;
   }
 
   updateEdition(modifyEdition: EditI) {
@@ -50,6 +52,7 @@ export class EditadosComponent implements OnInit {
         this.editions = response;
         this.getAllEditions();
       });
+    this.buttonSelect = false;
   }
 
   deleteEdition(idEdition: EditI) {

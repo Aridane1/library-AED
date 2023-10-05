@@ -28,6 +28,7 @@
       />
 
       <button
+        *ngIf="buttonSelect"
         type="submit"
         (click)="
           addEdition({
@@ -40,6 +41,7 @@
         Añadir Edición
       </button>
       <button
+        *ngIf="!buttonSelect"
         type="submit"
         (click)="
           updateEdition({

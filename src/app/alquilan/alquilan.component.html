@@ -30,6 +30,7 @@
       <input type="text" id="f_limite" #fLimite value="{{ _f_limite }}" />
 
       <button
+        *ngIf="!buttonSelect"
         type="submit"
         (click)="
           addRent({
@@ -44,6 +45,7 @@
         Registrar Alquiler
       </button>
       <button
+        *ngIf="buttonSelect"
         type="submit"
         (click)="
           updateRent({

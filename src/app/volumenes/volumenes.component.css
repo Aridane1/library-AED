@@ -46,7 +46,7 @@ input[type="text"] {
 
 /* Estilo para la tabla */
 .show-data-container {
-  width: 82vw;
+  width: fit-content;
   height: fit-content;
   background-color: #fff5;
   padding: 10px;
@@ -130,4 +130,3 @@ button {
   top: 5px;
   left: 5px;
 }
-

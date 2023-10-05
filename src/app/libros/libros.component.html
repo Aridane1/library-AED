@@ -45,6 +45,7 @@
       />
 
       <button
+        *ngIf="!buttonSelect"
         type="submit"
         (click)="
           addBook({
@@ -58,6 +59,7 @@
         Añadir Libro
       </button>
       <button
+        *ngIf="buttonSelect"
         type="submit"
         (click)="
           updateBook({

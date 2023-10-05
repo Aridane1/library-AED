@@ -11,7 +11,7 @@ const httpOptions = {
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
-  styleUrls: ['./libros.component.css']
+  styleUrls: ['./libros.component.css'],
 })
 export class LibrosComponent implements OnInit {
   _id?: string;
@@ -20,7 +20,7 @@ export class LibrosComponent implements OnInit {
   _autor!: string;
   _ano_escrito!: string;
   books!: BookI[];
-
+  buttonSelect: boolean = false;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class LibrosComponent implements OnInit {
     this._editorial = modifyBook.editorial;
     this._autor = modifyBook.autor;
     this._ano_escrito = modifyBook.ano_escrito;
+    this.buttonSelect = true;
   }
 
   updateBook(modifyBook: BookI) {
@@ -53,13 +54,12 @@ export class LibrosComponent implements OnInit {
         this.books = response;
         this.getAllBooks();
       });
+    this.buttonSelect = false;
   }
 
   deleteBook(idBook: BookI) {
     this.http
-      .delete<BookI[]>(
-        `http://localhost:3000/libros/${idBook.id}`
-      )
+      .delete<BookI[]>(`http://localhost:3000/libros/${idBook.id}`)
       .subscribe((response) => {
         this.books = response;
         this.getAllBooks();

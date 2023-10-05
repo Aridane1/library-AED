@@ -17,6 +17,7 @@ export class EdicionesComponent implements OnInit {
   _ISBN?: string;
   _editorial!: string;
   editions!: EditionI[];
+  buttonSelect: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +35,7 @@ export class EdicionesComponent implements OnInit {
   putEditionInForm(modifyEdition: EditionI) {
     this._ISBN = modifyEdition.ISBN;
     this._editorial = modifyEdition.editorial;
+    this.buttonSelect = true;
   }
 
   updateEdition(modifyEdition: EditionI) {
@@ -47,6 +49,7 @@ export class EdicionesComponent implements OnInit {
         this.editions = response;
         this.getAllEditions();
       });
+    this.buttonSelect = false;
   }
 
   deleteEdition(idEdition: EditionI) {
